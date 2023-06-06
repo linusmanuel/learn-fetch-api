@@ -5,11 +5,17 @@ const complement = document.querySelector('#complemento');
 const neighborhood = document.querySelector('#bairro');
 const city = document.querySelector('#cidade');
 const state = document.querySelector('#estado');
+const btnClear = document.querySelector('#btnLimpar');
 
 searchCEP.addEventListener('click', (event) => {
 	event.preventDefault();
 	const cepValue = inputCEP.value;
 	getData(cepValue);
+});
+
+btnClear.addEventListener('click', (event) => {
+	event.preventDefault();
+	clearUp();
 });
 
 function getData(cep) {
@@ -23,5 +29,12 @@ function getData(cep) {
 			city.value = data.localidade;
 			state.value = data.uf;
 			console.log(data);
+		})
+		.catch((error) => {
+			alert('We found some error! Try to insert another CEP', error);
 		});
+}
+
+function clearUp() {
+	window.location.reload();
 }
